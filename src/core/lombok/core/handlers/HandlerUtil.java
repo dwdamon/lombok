@@ -219,6 +219,9 @@ public class HandlerUtil {
 	
 	/** Matches the simple part of any annotation that lombok considers as indicative of NonNull status. */
 	public static final Pattern NON_NULL_PATTERN = Pattern.compile("^(?:nonnull)$", Pattern.CASE_INSENSITIVE);
+
+	/** Matches the simple part of any annotation that lombok considers as indicative of ConstructorParameter status. */
+	public static final Pattern CONSTRUCTOR_PARAMETER_PATTERN = Pattern.compile("^(?:constructorparameter)$", Pattern.CASE_INSENSITIVE);
 	
 	/** Matches the simple part of any annotation that lombok considers as indicative of Nullable status. */
 	public static final Pattern NULLABLE_PATTERN = Pattern.compile("^(?:nullable|checkfornull)$", Pattern.CASE_INSENSITIVE);

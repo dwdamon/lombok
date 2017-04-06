@@ -138,7 +138,8 @@ public class HandleConstructor {
 			if (!filterField(fieldDecl)) continue;
 			boolean isFinal = (fieldDecl.modifiers & ClassFileConstants.AccFinal) != 0;
 			boolean isNonNull = nullMarked && findAnnotations(fieldDecl, NON_NULL_PATTERN).length != 0;
-			if ((isFinal || isNonNull) && fieldDecl.initialization == null) fields.add(child);
+			boolean isConstructorParameter = findAnnotations(fieldDecl, CONSTRUCTOR_PARAMETER_PATTERN).length != 0;
+			if (((isFinal || isNonNull) && fieldDecl.initialization == null) || isConstructorParameter )  fields.add(child);
 		}
 		return fields;
 	}
@@ -349,10 +350,12 @@ public class HandleConstructor {
 				Argument parameter = new Argument(fieldName, fieldPos, copyType(field.type, source), Modifier.FINAL);
 				Annotation[] nonNulls = findAnnotations(field, NON_NULL_PATTERN);
 				Annotation[] nullables = findAnnotations(field, NULLABLE_PATTERN);
+
 				if (nonNulls.length != 0) {
 					Statement nullCheck = generateNullCheck(field, sourceNode);
 					if (nullCheck != null) nullChecks.add(nullCheck);
 				}
+        
 				parameter.annotations = copyAnnotations(source, nonNulls, nullables);
 				params.add(parameter);
 			}

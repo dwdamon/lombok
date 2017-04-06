@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
 
 /**
  * Generates a constructor with required arguments.
- * Required arguments are final fields and fields with constraints such as {@code @NonNull}.
+ * Required arguments are final fields and fields with constraints such as {@code @NonNull} and {@code @ConstructorParameter}.
  * <p>
  * Complete documentation is found at <a href="https://projectlombok.org/features/Constructor.html">the project lombok features page for &#64;Constructor</a>.
  * <p>
